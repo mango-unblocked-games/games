@@ -1,13 +1,6 @@
 const categories = ["All", "Racing", "Sports", "Adventure", "Platformer", "Puzzle", "Strategy", "Survival", "Multiplayer", "Simulation", "Idle", "Arcade", "Casual"];
 const games = [
   // Add verified, permitted games here. See README.md for the format.
-  {
-  id: "krillion-game",
-  title: "Krillion",
-  category: "Puzzle",
-  icon: "🦐",
-  url: "https://krillion.org"
-}
 ];
 const searchInput = document.querySelector("#search");
 const gameGrid = document.querySelector("#game-grid");
