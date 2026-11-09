@@ -1,207 +1,71 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mango Unblocked Games</title>
-    <meta name="description" content="Play browser games at Mango Unblocked Games.">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #101116;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        header {
-            height: 70px;
-            background: #191a22;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 35px;
-            border-bottom: 1px solid #292a34;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #f3b83f;
-        }
-
-        nav a {
-            color: #ddd;
-            text-decoration: none;
-            margin-left: 22px;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            color: #f3b83f;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 75px 20px 45px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
-
-        .hero h1 span {
-            color: #f3b83f;
-        }
-
-        .hero p {
-            color: #aaa;
-            margin-bottom: 25px;
-        }
-
-        .search {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px;
-            border: 1px solid #343540;
-            border-radius: 8px;
-            background: #1d1e27;
-            color: white;
-            font-size: 15px;
-            outline: none;
-        }
-
-        main {
-            max-width: 1150px;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .section-title {
-            font-size: 23px;
-            margin-bottom: 20px;
-        }
-
-        .games {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 18px;
-        }
-
-        .game {
-            background: #1c1d26;
-            border: 1px solid #292a35;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: 0.2s;
-        }
-
-        .game:hover {
-            transform: translateY(-4px);
-            border-color: #f3b83f;
-        }
-
-        .game img {
-            width: 100%;
-            height: 125px;
-            object-fit: cover;
-            background: #292a35;
-        }
-
-        .game h3 {
-            padding: 13px;
-            font-size: 15px;
-        }
-
-        .game[hidden] {
-            display: none;
-        }
-
-        footer {
-            margin-top: 70px;
-            padding: 25px;
-            text-align: center;
-            background: #191a22;
-            color: #888;
-            font-size: 13px;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 0 15px;
-            }
-
-            nav a {
-                margin-left: 10px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Play browser games at Mango Unblocked Games.">
+  <meta name="theme-color" content="#111217">
+  <title>Mango Unblocked Games</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
 </head>
-
 <body>
-
-<header>
-    <div class="logo">🥭 Mango Games</div>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="#games">Games</a>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="mango">🥭</span> Mango <span class="brand-light">Games</span></a>
+    <nav aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="#library">Games</a>
+      <a href="#categories">Categories</a>
+      <a href="#favorites">Favorites <span id="favorite-count">0</span></a>
     </nav>
-</header>
+  </header>
 
-<section class="hero">
-    <h1>Welcome to <span>Mango Games</span></h1>
-    <p>Your place to play browser games.</p>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">WELCOME TO MANGO</p>
+      <h1>Find your next <span>favorite game.</span></h1>
+      <p class="hero-copy">A growing collection of games you can play right in your browser.</p>
+      <label class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="Search games..." autocomplete="off">
+      </label>
+      <p class="small-note">No shooter games. No duplicate listings. Just games worth playing.</p>
+    </section>
 
-    <input
-        type="text"
-        class="search"
-        id="search"
-        placeholder="Search games..."
-        aria-label="Search games">
-</section>
+    <section id="categories" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">BROWSE</p><h2>Categories</h2></div>
+      </div>
+      <div id="category-list" class="category-list"></div>
+    </section>
 
-<main id="games">
-    <h2 class="section-title">All Games</h2>
+    <section id="library" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE COLLECTION</p><h2>All games</h2></div>
+        <span id="result-count" class="muted"></span>
+      </div>
+      <div id="game-grid" class="game-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>No games match your search. Try another name or category.</p>
+    </section>
 
-    <div class="games" id="game-list">
+    <section id="favorites" class="section favorites-section">
+      <div class="section-heading"><div><p class="eyebrow">YOUR PICKS</p><h2>Favorites</h2></div></div>
+      <div id="favorite-grid" class="game-grid"></div>
+      <p id="favorite-empty" class="muted">You haven't favorited any games yet. Tap the ☆ on a game card to save one.</p>
+    </section>
 
-        <article class="game" data-name="Example Game">
-            <img src="assets/example.png" alt="Example Game">
-            <h3>Example Game</h3>
-        </article>
+    <section class="notice">
+      <h2>Suggest a game</h2>
+      <p>Have a game we should consider adding? Send us its name and an official link.</p>
+      <a class="button-link" href="mailto:YOUR_EMAIL_HERE?subject=Mango%20Games%20Suggestion">Suggest a game</a>
+      <p class="tiny">Before adding a game, check its license and whether the developer permits embedding or redistribution.</p>
+    </section>
+  </main>
 
-    </div>
-</main>
-
-<footer>
-    <p>© 2026 Mango Unblocked Games</p>
-    <p>Made for browser gaming.</p>
-</footer>
-
-<script>
-    const search = document.getElementById("search");
-    const games = document.querySelectorAll(".game");
-
-    search.addEventListener("input", () => {
-        const query = search.value.toLowerCase();
-
-        games.forEach(game => {
-            const name = game.dataset.name.toLowerCase();
-            game.hidden = !name.includes(query);
-        });
-    });
-</script>
-
+  <footer>
+    <a class="brand footer-brand" href="index.html">🥭 Mango Games</a>
+    <p>© <span id="year"></span> Mango Unblocked Games</p>
+    <p class="tiny">Mango is an independent browser-game directory and is not affiliated with the creators of listed games.</p>
+  </footer>
 </body>
 </html>
